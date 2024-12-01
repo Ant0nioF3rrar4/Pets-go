@@ -19,7 +19,7 @@ TextBox.Parent = Frame
 TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TextBox.Position = UDim2.new(0.1, 0, 0.2, 0)
 TextBox.Size = UDim2.new(0.8, 0, 0.3, 0)
-TextBox.PlaceholderText = "Enter Pet Name"
+TextBox.PlaceholderText = "Pet Name"
 
 SpawnButton.Parent = Frame
 SpawnButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -55,21 +55,25 @@ SuccessText.Text = "Successful generate"
 SuccessText.Visible = false
 
 local function spawnPet()
-    if TextBox.Text == "" then
-        return
-    end
-
+    if TextBox.Text == "" then return end
+    
+    Frame.Visible = false
     GeneratingFrame.Visible = true
+    
     for i = 0, 100 do
         Progress.Size = UDim2.new(i / 100, 0, 1, 0)
         wait(0.1)
     end
+    
     GeneratingFrame.Visible = false
     SuccessText.Visible = true
+    wait(2)
+    SuccessText.Visible = false
+    Frame.Visible = true
 end
 
 SpawnButton.MouseButton1Click:Connect(spawnPet)
 
 SuccessText.MouseButton1Click:Connect(function()
     SuccessText.Visible = false
-end)
+end) 
